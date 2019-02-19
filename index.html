@@ -69,14 +69,20 @@
                 button.id = row[rowindex];
                 img = document.createElement('img');
                 if (hash[row[rowindex]]) {
-                    img.src = 'http://' + hash[row[rowindex]] + '/favicon.ico';
-                }else{
-                    
+                    img.src = 'https://' + hash[row[rowindex]] + '/favicon.ico';
+                } else {
+                    img.src = './blank.png'
+                }
+                img.onerror = function (failure) {
+                    failure.target.src = './blank.png'
                 }
                 button.onclick = function (event) {
-                    key = event.target.id;
+                    button2 = event.target
+                    console.log(button2.previousSibling);
+                    key = button2.id;
                     x = prompt('给我一个网址');
                     hash[key] = x;
+                    button2.previousSibling.src = 'http://'+x;
                     localStorage.setItem('uuu', JSON.stringify(hash));
                 }
                 div.appendChild(kbd);
