@@ -82,7 +82,7 @@
                     key = button2.id;
                     x = prompt('给我一个网址');
                     hash[key] = x;
-                    button2.previousSibling.src = 'http://'+x;
+                    button2.previousSibling.src = 'https://'+x+'/favicon.ico';
                     localStorage.setItem('uuu', JSON.stringify(hash));
                 }
                 div.appendChild(kbd);
