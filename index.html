@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <title>我的导航</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div id="main" class="wrapper"></div>
+    </main>
+    <footer></footer>
+    <script>
+        keys = [
+            ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+            ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+            ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+        ];
+        hash = {
+            q: 'qq.com',
+            w: 'weibo.com',
+            e: '',
+            r: '',
+            t: '',
+            y: '',
+            u: '',
+            i: '',
+            o: '',
+            p: '',
+            a: '',
+            s: '',
+            d: '',
+            f: '',
+            g: '',
+            h: '',
+            j: '',
+            k: '',
+            l: '',
+            z: '',
+            x: '',
+            c: '',
+            v: '',
+            b: '',
+            n: '',
+            m: '',
+        };
+
+        hashInLocalStorage = JSON.parse(localStorage.getItem('uuu') || 'null');
+        if (hashInLocalStorage) {
+            hash = hashInLocalStorage;
+        }
+        // 遍历keys,生成kbd标签
+        for (index = 0; index < keys.length; index++) {
+            row = keys[index];
+            div = document.createElement('div');
+            div.className = 'row';
+            main.appendChild(div);
+            for (rowindex = 0; rowindex < row.length; rowindex++) {
+                kbd = document.createElement('kbd');
+                span = document.createElement('span');
+                span.textContent = row[rowindex];
+                span.className = 'text';
+                kbd.className = 'key';
+                button = document.createElement('button');
+                button.textContent = ('E');
+                button.id = row[rowindex];
+                img = document.createElement('img');
+                if (hash[row[rowindex]]) {
+                    img.src = 'http://' + hash[row[rowindex]] + '/favicon.ico';
+                }else{
+                    
+                }
+                button.onclick = function (event) {
+                    key = event.target.id;
+                    x = prompt('给我一个网址');
+                    hash[key] = x;
+                    localStorage.setItem('uuu', JSON.stringify(hash));
+                }
+                div.appendChild(kbd);
+                kbd.appendChild(img);
+                kbd.appendChild(button);
+                kbd.appendChild(span);
+            }
+        }
+        document.onkeypress = function (event) {
+            key = event.key;
+            website = hash[key];
+            if (website) {
+                window.open('http://' + website, '_blank');
+            }
+        }
+    </script>
+</body>
+
+</html>
